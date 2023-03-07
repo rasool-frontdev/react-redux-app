@@ -1,9 +1,20 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Input } from "../ui";
+import { loginUserStart } from "../slice/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.auth);
+  console.log(isLoading);
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+    dispatch(loginUserStart());
+  };
+
   return (
     <div className="text-center">
       <main className="form-signin w-25 m-auto">
@@ -24,13 +35,12 @@ const Login = () => {
             type={"password"}
           />
 
-          {/* <div className="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me" /> Remember me
-            </label>
-          </div> */}
-          <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">
-            Sign in
+          <button
+            className="w-100 btn btn-lg btn-primary mt-3"
+            type="submit"
+            disabled={isLoading}
+            onClick={loginHandler}>
+            {isLoading ? "Loading..." : "Sign in"}
           </button>
           <p className="mt-5 mb-3 text-muted">© 2017–2022</p>
         </form>
