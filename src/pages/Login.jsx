@@ -42,7 +42,7 @@ const Login = () => {
             onClick={loginHandler}>
             {isLoading ? "Loading..." : "Sign in"}
           </button>
-          <p className="mt-5 mb-3 text-muted">© 2017–2022</p>
+          <p className="mt-5 mb-3 text-muted">© 2017–2023</p>
         </form>
       </main>
     </div>
