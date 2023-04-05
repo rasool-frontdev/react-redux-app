@@ -4,13 +4,15 @@ import { Input } from "../ui";
 import { signUserFailure, signUserStart, signUserSuccess } from "../slice/auth";
 import AuthService from "../service/auth";
 import ValidationError from "../components/ValidationError";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -19,9 +21,9 @@ const Register = () => {
     try {
       const response = await AuthService.userRegister(user);
       dispatch(signUserSuccess(response.user));
+      navigate("/");
     } catch (error) {
       dispatch(signUserFailure(error.response.data.errors));
-      console.log(error.response.data.errors);
     }
   };
 
@@ -47,9 +49,9 @@ const Register = () => {
           <button
             className="w-100 btn btn-lg btn-primary mt-3"
             type="submit"
-            disabled={isLoading}
+            disabled={isLoggedIn}
             onClick={registerHandler}>
-            {isLoading ? "Loading..." : "Register"}
+            {isLoggedIn ? "Loading..." : "Register"}
           </button>
           <p className="mt-5 mb-3 text-muted">© 2017–2022</p>
         </form>
