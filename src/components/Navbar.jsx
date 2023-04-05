@@ -1,8 +1,15 @@
-import { useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { signOut } from "../slice/auth";
 
 const Navbar = () => {
   const { isLoggedIn, user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const logoutUser = () => {
+    dispatch(signOut());
+    navigate("/login");
+  };
 
   return (
     <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
@@ -27,8 +34,11 @@ const Navbar = () => {
       </Link>
 
       {isLoggedIn ? (
-        <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">
           <h5>{user.username !== null && user.username}</h5>
+          <button onClick={logoutUser} className="btn btn-danger ms-3 p-1">
+            Logout
+          </button>
         </nav>
       ) : (
         <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">

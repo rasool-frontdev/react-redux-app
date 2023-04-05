@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -7,8 +7,6 @@ import Register from "./pages/Register";
 import "./styles/style.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <div className="container">
