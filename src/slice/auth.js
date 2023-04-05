@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setItem } from "../helpers/helpersStorage";
 const initialState = {
   isLoading: false,
   isLoggedIn: false,
@@ -17,6 +18,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.isLoading = false;
       state.user = action.payload;
+      setItem("token", action.payload.token);
     },
     signUserFailure: (state, action) => {
       state.isLoggedIn = false;
@@ -28,6 +30,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { signUserStart, signUserSuccess, signUserFailure,signOut } =
+export const { signUserStart, signUserSuccess, signUserFailure, signOut } =
   authSlice.actions;
 export default authSlice.reducer;
