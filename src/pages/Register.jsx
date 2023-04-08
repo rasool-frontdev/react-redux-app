@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input } from "../ui";
 import { signUserFailure, signUserStart, signUserSuccess } from "../slice/auth";
@@ -26,6 +26,10 @@ const Register = () => {
       dispatch(signUserFailure(error.response.data.errors));
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/");
+  }, []);
 
   return (
     <div className="text-center">
