@@ -27,8 +27,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (isLoggedIn) navigate("/");
-  }, []);
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="text-center">
