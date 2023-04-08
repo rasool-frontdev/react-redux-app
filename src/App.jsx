@@ -9,6 +9,8 @@ import AuthService from "./service/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { signUserSuccess } from "./slice/auth";
 import { getItem } from "./helpers/helpersStorage";
+import ArticleService from "./service/article";
+import { getArticlesStart, getArticlesSuccess } from "./slice/article";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,16 +24,24 @@ function App() {
       console.log(error);
     }
   };
+
+  const getArticles = async () => {
+    dispatch(getArticlesStart());
+    try {
+      const response = await ArticleService.getArticles();
+      dispatch(getArticlesSuccess(response.articles));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     const token = getItem("token");
     if (token) {
       getUser();
+      getArticles();
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (!isLoggedIn) navigate("/login");
-  // }, [isLoggedIn]);
   return (
     <>
       <div className="container">
