@@ -11,6 +11,7 @@ import { signUserSuccess } from "./slice/auth";
 import { getItem } from "./helpers/helpersStorage";
 import ArticleService from "./service/article";
 import { getArticlesStart, getArticlesSuccess } from "./slice/article";
+import ArticleDetail from "./components/ArticleDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/article/:slug" element={<ArticleDetail />} />
         </Routes>
       </div>
     </>
