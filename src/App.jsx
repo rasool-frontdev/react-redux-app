@@ -9,8 +9,7 @@ import AuthService from "./service/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { signUserSuccess } from "./slice/auth";
 import { getItem } from "./helpers/helpersStorage";
-import ArticleService from "./service/article";
-import { getArticlesStart, getArticlesSuccess } from "./slice/article";
+
 import ArticleDetail from "./components/ArticleDetail";
 import CreateArticle from "./components/CreateArticle";
 
@@ -27,20 +26,12 @@ function App() {
     }
   };
 
-  const getArticles = async () => {
-    dispatch(getArticlesStart());
-    try {
-      const response = await ArticleService.getArticles();
-      dispatch(getArticlesSuccess(response.articles));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
   useEffect(() => {
     const token = getItem("token");
     if (token) {
       getUser();
-      getArticles();
+      // getArticles();
     }
   }, []);
 

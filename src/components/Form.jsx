@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import Input from "../ui/input";
 import TextArea from "../ui/text-area";
+import { useSelector } from "react-redux";
 
 const Form = (props) => {
   const {
@@ -13,8 +13,9 @@ const Form = (props) => {
     formSubmit,
     btnText,
   } = props;
+
+  const { isLoading } = useSelector((state) => state.article);
   return (
-    <>
       <form onSubmit={formSubmit}>
         <Input label={"Title"} state={title} setState={setTitle} />
         <TextArea
@@ -28,11 +29,15 @@ const Form = (props) => {
           setState={setBody}
           height={"300px"}
         />
-        <button type="submit" className="btn btn-lg btn-primary mt-2 w-100">
+        <button
+          type="submit"
+          className="btn btn-lg btn-primary mt-2 w-100"
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : btnText}
           {btnText}
         </button>
       </form>
-    </>
   );
 };
 

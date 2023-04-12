@@ -3,21 +3,33 @@ import Input from "../ui/input";
 import TextArea from "../ui/text-area";
 import Form from "./Form";
 import ArticleService from "../service/article";
+import { useDispatch } from "react-redux";
+import {
+  postArticleDetailFailure,
+  postArticleDetailStart,
+  postArticleDetailSuccess,
+} from "../slice/article";
+import { useNavigate } from "react-router-dom";
 
 const CreateArticle = () => {
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [body, setBody] = useState();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const formSubmit = async (e) => {
     e.preventDefault();
-    
+
+
     const article = { title, description, body };
+    dispatch(postArticleDetailStart());
     try {
-      const response = await ArticleService.postArticle(article);
-      console.log(response);
+      await ArticleService.postArticle(article);
+      dispatch(postArticleDetailSuccess());
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      dispatch(postArticleDetailFailure(error));
     }
   };
 
