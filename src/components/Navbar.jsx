@@ -7,7 +7,7 @@ const Navbar = () => {
   const { isLoggedIn, user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const logoutUser = () => {
     dispatch(signOut());
     removeItem("token");
@@ -37,12 +37,17 @@ const Navbar = () => {
       </Link>
 
       {isLoggedIn ? (
-        <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">
-          <h5>{user.username !== null && user.username}</h5>
-          <button onClick={logoutUser} className="btn btn-danger ms-3 p-1">
-            Logout
-          </button>
-        </nav>
+        <>
+          <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">
+            <h5>{user.username !== null && user.username}</h5>
+            <Link to="/create-article" className="btn btn-success ms-3 p-1">
+              Create article
+            </Link>
+            <button onClick={logoutUser} className="btn btn-danger ms-3 p-1">
+              Logout
+            </button>
+          </nav>
+        </>
       ) : (
         <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
           <Link

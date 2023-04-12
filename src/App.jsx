@@ -12,6 +12,7 @@ import { getItem } from "./helpers/helpersStorage";
 import ArticleService from "./service/article";
 import { getArticlesStart, getArticlesSuccess } from "./slice/article";
 import ArticleDetail from "./components/ArticleDetail";
+import CreateArticle from "./components/CreateArticle";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/article/:slug" element={<ArticleDetail />} />
+          <Route path="/create-article" element={<CreateArticle />} />
+
         </Routes>
       </div>
     </>
