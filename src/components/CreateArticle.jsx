@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../ui/input";
 import TextArea from "../ui/text-area";
+import Form from "./Form";
 
 const CreateArticle = () => {
   const [title, setTitle] = useState();
@@ -10,21 +11,7 @@ const CreateArticle = () => {
   return (
     <div className="text-center">
       <h1>Create Article</h1>
-      <form action="">
-        <Input label={"Title"} state={title} setState={setTitle} />
-        <TextArea
-          label={"Description"}
-          state={description}
-          setState={setDescription}
-        />
-        <TextArea
-          label={"Body"}
-          state={body}
-          setState={setBody}
-          height={"300px"}
-        />
-        <button className="btn btn-lg btn-primary mt-2 w-100">Create</button>
-      </form>
+      <Form btnText={"Create"} />
     </div>
   );
 };
