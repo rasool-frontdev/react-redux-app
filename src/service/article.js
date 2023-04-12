@@ -14,6 +14,12 @@ const ArticleService = {
     const { data } = await axios.post(`/articles/`, {article});
     return data;
   },
+
+
+  async deleteArticle(article) {
+    const { data } = await axios.post(`/articles/`, {article});
+    return data;
+  },
 };
 
 export default ArticleService;

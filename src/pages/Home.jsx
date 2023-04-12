@@ -23,6 +23,8 @@ const Home = () => {
   }, []);
 
   const { articles, isLoading } = useSelector((state) => state.article);
+  const { user, isLoggedIn } = useSelector((state) => state.auth);
+
   const navigate = useNavigate();
   return (
     <div>
@@ -62,16 +64,21 @@ const Home = () => {
                       }}>
                       View
                     </button>
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-outline-secondary">
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-outline-danger">
-                      Delete
-                    </button>
+                    {isLoggedIn &&
+                      user.username === article.author.username && (
+                        <>
+                          <button
+                            type="button"
+                            className="btn btn-sm btn-outline-secondary">
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-sm btn-outline-danger">
+                            Delete
+                          </button>
+                        </>
+                      )}
                   </div>
                   <small className="text-muted">
                     {article.author.username}
