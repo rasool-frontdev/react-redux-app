@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import Input from "../ui/input";
 import TextArea from "../ui/text-area";
 
-const Form = ({btnText}) => {
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
-  const [body, setBody] = useState();
-
+const Form = (props) => {
+  const {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    body,
+    setBody,
+    formSubmit,
+    btnText,
+  } = props;
   return (
-    <div>
-      <form>
+    <>
+      <form onSubmit={formSubmit}>
         <Input label={"Title"} state={title} setState={setTitle} />
         <TextArea
           label={"Description"}
@@ -22,9 +28,11 @@ const Form = ({btnText}) => {
           setState={setBody}
           height={"300px"}
         />
-        <button className="btn btn-lg btn-primary mt-2 w-100">{btnText}</button>
+        <button type="submit" className="btn btn-lg btn-primary mt-2 w-100">
+          {btnText}
+        </button>
       </form>
-    </div>
+    </>
   );
 };
 
