@@ -12,6 +12,7 @@ import { getItem } from "./helpers/helpersStorage";
 
 import ArticleDetail from "./components/ArticleDetail";
 import CreateArticle from "./components/CreateArticle";
+import EditArticle from "./components/EditArticle";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,6 @@ function App() {
     }
   };
 
-  
   useEffect(() => {
     const token = getItem("token");
     if (token) {
@@ -45,7 +45,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/article/:slug" element={<ArticleDetail />} />
           <Route path="/create-article" element={<CreateArticle />} />
-
+          <Route path="/edit-article/:slug" element={<EditArticle />} />
         </Routes>
       </div>
     </>

@@ -7,7 +7,6 @@ import { getArticlesStart, getArticlesSuccess } from "../slice/article";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { slug } = useParams();
 
   const getArticles = async () => {
     dispatch(getArticlesStart());
@@ -79,7 +78,10 @@ const Home = () => {
                         <>
                           <button
                             type="button"
-                            className="btn btn-sm btn-outline-secondary">
+                            className="btn btn-sm btn-outline-secondary"
+                            onClick={() =>
+                              navigate(`/edit-article/${article.slug}`)
+                            }>
                             Edit
                           </button>
                           <button

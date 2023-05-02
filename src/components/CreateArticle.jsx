@@ -12,9 +12,9 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const CreateArticle = () => {
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
-  const [body, setBody] = useState();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [body, setBody] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
