@@ -39,7 +39,6 @@ const ArticleDetail = () => {
             <p className="col-md-8 fs-4">{ArticleDetail.description}</p>
             <div className="d-flex gap-3">
               <p>
-                {" "}
                 <span className="fw-bold text-muted">Created at:</span>{" "}
                 {moment(ArticleDetail.createdAt).format("DD MM, YYYY")}
               </p>
