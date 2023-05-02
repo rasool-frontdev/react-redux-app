@@ -1,18 +1,28 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../ui/loader";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ArticleService from "../service/article";
 import { getArticlesStart, getArticlesSuccess } from "../slice/article";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const { slug } = useParams();
 
   const getArticles = async () => {
     dispatch(getArticlesStart());
     try {
       const response = await ArticleService.getArticles();
       dispatch(getArticlesSuccess(response.articles));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteArticle = async (slug) => {
+    try {
+      await ArticleService.deleteArticle(slug);
+      getArticles();
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +84,8 @@ const Home = () => {
                           </button>
                           <button
                             type="button"
-                            className="btn btn-sm btn-outline-danger">
+                            className="btn btn-sm btn-outline-danger"
+                            onClick={() => deleteArticle(article.slug)}>
                             Delete
                           </button>
                         </>

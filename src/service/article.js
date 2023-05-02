@@ -11,13 +11,12 @@ const ArticleService = {
   },
 
   async postArticle(article) {
-    const { data } = await axios.post(`/articles/`, {article});
+    const { data } = await axios.post(`/articles/`, { article });
     return data;
   },
 
-
-  async deleteArticle(article) {
-    const { data } = await axios.post(`/articles/`, {article});
+  async deleteArticle(slug) {
+    const { data } = await axios.delete(`/articles/${slug}`);
     return data;
   },
 };
